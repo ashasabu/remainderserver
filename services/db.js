@@ -9,7 +9,6 @@ const User = mongoose.model('User',{
     userId:Number,
     username:String,
     password:String,
-    
     event:[]
 })
 

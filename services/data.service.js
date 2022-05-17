@@ -5,9 +5,9 @@ const jwt=require('jsonwebtoken')
 const db=require('./db')
 
 database:any ={
-    1000:{userId:1000,username:"meena",pswd:1000,event:[]},
-    1001:{userId:1001,username:"neena",pswd:1001,event:[]},
-    1002:{userId:1002,username:"aneena",pswd:1002,event:[]}
+    1:{userId:1,username:"meena",pswd:1,event:[]},
+    2:{userId:2,username:"neena",pswd:2,event:[]},
+    3:{userId:3,username:"aneena",pswd:3,event:[]}
   }
 
   const register= (username,userId,pswd)=>{
@@ -54,13 +54,16 @@ else{
           currentId:userId
         },'supersecret123456789')
       return {
+         
         statusCode:200,
         status:true,
         message:"Login Sucessfull...",
         token:token,
         currentId,
         currentUser
+       
       } 
+     
       }
       else{
         return{
@@ -71,8 +74,45 @@ else{
        
       }
     })
+   }
+//add event
+
+  const addEvent=(userId,date,text)=>{
+  
+    var date = date;
+    date = date.split("-").reverse().join("-");
+    
+    return db.User.findOne({userId})
+    .then(result=>{
+      if(result){
+        
+        result.event.push(
+          {
+            date,
+            text
+          }
+        )
+       // console.log(database);
+   result.save()
+  return  {
+    statusCode:200,
+    status:true,
+    message:"successfully saved"
+
   }
+      }
+
+     else{
+      return{
+        statusCode:401,
+      status:false,
+      message:"Invalid Creditials"
+      }
+     } 
+    })
+    }
    module.exports={
        register,
-       login
+       login,
+       addEvent
    }

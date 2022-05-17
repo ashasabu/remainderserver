@@ -7,6 +7,10 @@ const jwt=require('jsonwebtoken')
 const cors=require('cors')
 //import data.service
 const dataService=require('./services/data.service')
+const res = require('express/lib/response')
+
+
+
 //create server app using express
 const app=express()
 //use cores in server app
@@ -50,6 +54,15 @@ app.post('/register',(req,res)=>{
   //login api 
 app.post('/login',(req,res)=>{
     dataService.login(req.body.userId,req.body.pswd)
+    .then(result=>{
+        res.status(result.statusCode).json(result)
+    
+      })
+  })
+
+  //add event api
+  app.post('/addEvent',(req,res)=>{
+    dataService.addEvent(req.body.userId,req.body.date,req.body.text)
     .then(result=>{
         res.status(result.statusCode).json(result)
     
