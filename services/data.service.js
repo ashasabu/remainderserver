@@ -111,8 +111,29 @@ else{
      } 
     })
     }
+
+    const viewdetails=(userId)=>{
+      return db.User.findOne({userId})
+      .then(result=>{
+        if(result){
+          return  {
+            statusCode:200,
+            status:true,
+            event:result.event
+          } 
+        }
+        else{
+          return  {
+            statusCode:401,
+            status:false,
+            message:"user does not exist"
+          }
+        }
+      })
+    }
    module.exports={
        register,
        login,
-       addEvent
+       addEvent,
+       viewdetails
    }

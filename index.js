@@ -27,6 +27,7 @@ app.listen(3000,()=>{
 })
 
 
+
 //jwtMiddleware
 // const jwtMiddleware=(req,res,next)=>{
 //     try{
@@ -68,3 +69,9 @@ app.post('/login',(req,res)=>{
     
       })
   })
+//view details
+  app.post('/viewdetails',(req,res)=>{
+    dataService.viewdetails(req.body.userId)
+    .then(result=>{
+      res.status(result.statusCode).json(result)
+})  })
