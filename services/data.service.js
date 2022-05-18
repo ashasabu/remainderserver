@@ -114,12 +114,12 @@ else{
 
     const viewdetails=(userId)=>{
       return db.User.findOne({userId})
-      .then(result=>{
-        if(result){
+      .then(user=>{
+        if(user){
           return  {
             statusCode:200,
             status:true,
-            event:result.event
+            event:user.event
           } 
         }
         else{
