@@ -21,10 +21,6 @@ app.use(cors({
 
 //to parse json data
 app.use(express.json())
-//set port number
-app.listen(3000,()=>{
-    console.log("server started at 3000");
-})
 
 
 
@@ -75,3 +71,16 @@ app.post('/login',(req,res)=>{
     .then(result=>{
       res.status(result.statusCode).json(result)
 })  })
+
+//delete
+app.delete('/deleteAcc/:userId',(req,res)=>{
+  dataService.deleteAcc(req.params.userId)
+  .then(result=>{
+      res.status(result.statusCode).json(result)
+  
+    })
+})
+//set port number
+app.listen(3000,()=>{
+  console.log("server started at 3000");
+})

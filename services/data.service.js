@@ -131,9 +131,31 @@ else{
         }
       })
     }
+
+    const deleteAcc=(userId)=>{
+      return db.User.deleteOne({userId})
+      .then(user=>{
+        if(!user){
+          return  {
+            statusCode:401,
+            status:false,
+            message:"Operation Invalid"
+          }
+        }
+        else{
+          return  {
+            statusCode:200,
+            status:true,
+            message:"Account Number deleted successfully"
+        
+          }
+        }
+      })
+    }
    module.exports={
        register,
        login,
        addEvent,
-       viewdetails
+       viewdetails,
+       deleteAcc
    }
